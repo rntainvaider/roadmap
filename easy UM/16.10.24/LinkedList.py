@@ -35,6 +35,9 @@ class LinkedList:
                 cur_node = cur_node.next_node
         self.count_elem += 1
 
+    def pop(self) -> None:
+        pass
+
 
 n = Node(1)
 
