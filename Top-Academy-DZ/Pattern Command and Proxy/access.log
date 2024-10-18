@@ -1,0 +1,4 @@
+Operation: get_sum
+Operation: get_max
+Operation: get_min
+Operation: get_len

@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: bisque;
+}
+
+.boxs {
+    padding: 20px;
+}
+
+.boxx {
+    padding: 20px;
+    display: none;
+}
+
+.name_data {
+    border: 1px solid black;
+    border-bottom: none;
+    padding: 20px;
+}
+
+.data_time {
+    float: right;
+}
+
+.comment {
+    border: 1px solid black;
+    padding: 20px;
+    text-align: justify;
+}
+
+.add_new_message {
+    padding-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.input_name {
+    padding: 20px;
+}
+
+.input_message {
+    padding: 20px;
+}
+
+.btn_send {
+    padding: 20px;
+}
+
+.btn {
+    width: 100%;
+    padding: 5px;
+}
+
+.name {
+    padding-right: 40px;
+}
+
+#name {
+    width: 91%;
+}
+
+.message {
+    padding-right: 20px;
+}
+
+#message {
+    width: 91%;
+    vertical-align: top;
+}
