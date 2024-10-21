@@ -1,67 +1,58 @@
-from random import randint
 from threading import Thread
-import time
+from random import randint
+from time import sleep
+from sympy import isprime
+from math import factorial
 
-class Task:
-    def __init__(self) -> None:
-        self.rand_numbers = list()
-        self.prime_numbers = list()
-        self.factorial_numbers = list()
+input_file_path = input("Введите путь к файлу\n")
 
-    def fill_with_random_numbers(self, name_file: str) -> None:
-        with open(name_file, 'w+') as file:
-            for _ in range(10):
-                ran_num = randint(1, 10)
-                file.write(f"{str(ran_num)}\n")
-                self.rand_numbers.append(ran_num)
-                print(f"Заполняем файл случайными числами - {ran_num}")
-                time.sleep(1)
+def random_numbers(input_file_path: str) -> None:
+    with open(input_file_path, 'w', encoding='UTF-8') as file:
+        for _ in range(10):
+            numb = randint(1, 50)
+            print(f"Записываем случайное число {numb} в файл {input_file_path}")
+            file.write(f"{str(numb)}\n")
+            sleep(1)
 
-        print(f"Сформированный список {self.rand_numbers}")
+def finding_a_prime_number(file_path: str, output_path: str) -> None:
+    with open(file_path, 'r', encoding='UTF-8') as file:
+        numbers = [int(item.strip()) for item in file.readlines()]
+        for numb in numbers:
+            print(f"Ищем простое число {numb}")
+            sleep(1)
 
-    def get_prime_numbers(self) -> None:
-        for item in self.rand_numbers:
-            print(f"Ищем простые числа {item}")
-            time.sleep(1)
-            if int(item) > 0:
-                k = 0
-                for i in range(1, item + 1):
-                    if item % i == 0:
-                        k += 1
-                if k == 2:
-                    self.prime_numbers.append(i)
+        primes = [num for num in numbers if isprime(num)]
+        for number in primes:
+            print(f"Нашли простое число {number}")
+            sleep(1)
 
-        with open("prime_numbers.txt", 'w') as file:
-            for item in self.prime_numbers:
-                file.write(f"{str(item)}\n")
+    with open(output_path, 'a', encoding='UTF-8') as file:
+        for item in primes:
+            file.write(f"{str(item)} - простое число\n")
 
-        print(f"Все простые числа списка - {self.prime_numbers}")
+def finding_the_factorial_of_a_number(file_path: str, output_path: str) -> None:
+    with open(file_path, 'r', encoding='UTF-8') as file:
+        numbers = [int(item.strip()) for item in file.readlines()]
+        for numb in numbers:
+            print(f"Ищем факториал числа {numb}")
+            sleep(1)
 
-    def get_factorial_numbers(self) -> None:
-        fac_numb = 1
-        for number in self.rand_numbers:
-            fac_numb = 1
-            for numb in range(number, 0, -1):
-                fac_numb *= numb
-            self.factorial_numbers.append(fac_numb)
-            print(f"Ищем факториал числа {number} = {fac_numb}")
-            time.sleep(1)
-        print(f"Сформированный список факториалов {self.factorial_numbers}")
+        factorials = {num: factorial(num) for num in numbers}
 
-        with open("factorial_numbers.txt", 'w') as file:
-            for item in self.factorial_numbers:
-                file.write(f"{str(item)}\n")
+    with open(output_path, 'a', encoding='UTF-8') as file:
+        for num, fact in factorials.items():
+            file.write(f"Факториал {num} = {fact}\n")
+            print(f"Нашли факториал числа {num} = {fact}")
+            sleep(1)
 
-name_file = input("Введите название файла с расширением\n")
+thread1 = Thread(target=random_numbers(input_file_path))
+thread2 = Thread(target=finding_a_prime_number(input_file_path, 'prime_numbers.txt'))
+thread3 = Thread(target=finding_the_factorial_of_a_number(input_file_path, 'factorials_numbers.txt'))
 
-task = Task()
+thread1.start()
+thread2.start()
+thread3.start()
 
-t1 = Thread(target=task.fill_with_random_numbers(name_file))
-t2 = Thread(target=task.get_prime_numbers)
-t3 = Thread(target=task.get_factorial_numbers)
-
-t1.start()
-t1.join()
-
-t2.start()
-t3.start()
+thread1.join()
+thread2.join()
+thread3.join()
