@@ -5,6 +5,7 @@
   - [random](#random)
   - [time](#time)
   - [SymPy](#sympy)
+  - [tkinter](#tkinter)
   - [math](#math)
   - [os](#os)
 - [Многопоточность](#многопоточность)
