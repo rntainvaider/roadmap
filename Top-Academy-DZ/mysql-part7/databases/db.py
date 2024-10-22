@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
 from databases.database_settings import get_mysql_url
@@ -43,7 +43,7 @@ class DbWorker:
         last_name: str | None,
         age: int | None,
         gender=None,
-        email: str | None,
+        email=None,
     ) -> None:
         with Session(autoflush=False, bind=self.engine) as bd:
             user = bd.query(User).filter(User.id == user_id).first()
@@ -86,12 +86,40 @@ class DbWorker:
             bd.commit()
             print(f"Дружба между {user_id} и {friend_id} добавлена.")
 
-    def add_user_post(self, user_id: int, content: str):
+    def add_user_post(self, user_id: int, content: str) -> None:
         with Session(autoflush=False, bind=self.engine) as bd:
             user_post = UserPost(user_id=user_id, content=content)
             bd.add(user_post)
             bd.commit()
             print(f"Пользователь {user_id} добавил пост.")
+
+    def get_date_user(self, user_id: int) -> None:
+        with Session(autoflush=False, bind=engine) as bd:
+            user = select(User).select_from(User).filter(User.id == user_id)
+            result = bd.execute(user).all()
+            print(result)
+
+    def get_friends_user(self, user_id: int) -> None:
+        with Session(autoflush=False, bind=engine) as bd:
+            friends = (
+                select(
+                    User.first_name,
+                    User.last_name,
+                    UserFriends.friend_id.label("Друг_user"),
+                )
+                .select_from(User)
+                .join(UserFriends, User.id == UserFriends.user_id)
+                .filter(User.id == user_id)
+            )
+            print(friends)
+            result = bd.execute(friends).all()
+            print(result)
+
+            # SELECT users.first_name, users.last_name, users_friends.friend_id as `Друг_user`
+            # FROM users
+            # JOIN users_friends
+            # ON users.id = users_friends.user_id
+            # WHERE users.id = 2;
 
 
 DB = DbWorker(engine=engine)
