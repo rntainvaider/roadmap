@@ -1,5 +1,4 @@
 from enum import Enum as E
-from re import T
 
 from sqlalchemy import Column, Enum, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import DeclarativeBase
