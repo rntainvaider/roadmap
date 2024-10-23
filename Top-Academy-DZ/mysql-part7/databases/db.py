@@ -1,3 +1,4 @@
+from unittest import result
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import Session
 
@@ -115,11 +116,16 @@ class DbWorker:
             result = bd.execute(friends).all()
             print(result)
 
-            # SELECT users.first_name, users.last_name, users_friends.friend_id as `Друг_user`
-            # FROM users
-            # JOIN users_friends
-            # ON users.id = users_friends.user_id
-            # WHERE users.id = 2;
-
+    def get_user_post(self, user_id: int) -> None:
+        with Session(autoflush=False, bind=engine) as bd:
+            posts = (
+                select(User.first_name, User.last_name, UserPost.content, UserPost.created_at)
+                .select_from(User)
+                .join(UserPost, User.id == UserPost.user_id)
+                .filter(User.id == user_id)
+                )
+            print(posts)
+            result = bd.execute(posts).all()
+            print(result)
 
 DB = DbWorker(engine=engine)

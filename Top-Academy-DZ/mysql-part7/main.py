@@ -12,8 +12,10 @@ from databases.db import DB
 
 # DB.add_user_friends(2, 5)
 
-# DB.add_user_post(2, "Направлений рост сложившаяся организации, формировании соображения активности нас отношении .")
+# DB.add_user_post(5, "Pulvinar faucibus. Dictumst. Dolor sapien quis, ornare adipiscing urna velit et mattis vel consectet")
 
 # DB.get_date_user(2)
 
-DB.get_friends_user(2)
+# DB.get_friends_user(2)
+
+# DB.get_user_post(2)
