@@ -4,7 +4,7 @@ CREATE DATABASE music;
 -- Создаем таблицу artist
 CREATE TABLE artist
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     name VARCHAR (50) NOT NULL,
     PRIMARY KEY (ID)
 );
@@ -12,7 +12,7 @@ CREATE TABLE artist
 -- Создаем таблицу genre
 CREATE TABLE genre
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     title VARCHAR(50) NOT NULL,
     PRIMARY KEY (ID)
 );
@@ -20,7 +20,7 @@ CREATE TABLE genre
 -- Создаем таблицу artist_genre
 CREATE TABLE artist_genre
 (
-    ID INT AUTO_INCREMENT,
+    ID SERIAL,
     artist_id INT,
     genre_id INT,
     PRIMARY KEY (ID),
@@ -31,7 +31,7 @@ CREATE TABLE artist_genre
 -- Создаем таблицу album
 CREATE TABLE album
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     title VARCHAR(50) NOT NULL,
     year INT NOT NULL,
     PRIMARY KEY (ID)
@@ -40,7 +40,7 @@ CREATE TABLE album
 -- Создаем таблицу artist_album
 CREATE TABLE artist_album
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     artist_id INT,
     album_id INT,
     PRIMARY KEY (ID),
@@ -51,7 +51,7 @@ CREATE TABLE artist_album
 -- Создаем таблицу collectios
 CREATE TABLE collections
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     name VARCHAR(50) NOT NULL,
     age INT NOT NULL,
     PRIMARY KEY (ID)
@@ -60,7 +60,7 @@ CREATE TABLE collections
 -- Создаем таблицу tracks
 CREATE TABLE tracks
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     name VARCHAR(50) NOT NULL,
     year INT NOT NULL,
     duration INT NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE tracks
 -- Создаем таблицу tracks_collections
 CREATE TABLE tracks_collections
 (
-    ID INT AUTO_INCREMENT NOT NULL,
+    ID SERIAL NOT NULL,
     collection_id INT,
     tracks_id INT,
     PRIMARY KEY (ID),
