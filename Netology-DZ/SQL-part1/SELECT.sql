@@ -5,7 +5,7 @@ ORDER BY duration DESC
 LIMIT 1;
 
 -- Название треков, продолжительность которых не менее 3,5 минут.
-SELECT name, duration FROM tracks WHERE duration > 3.5;
+SELECT name, duration FROM tracks WHERE duration >= 210;
 
 -- Названия сборников, вышедших в период с 2018 по 2020 год включительно.
 SELECT name
@@ -20,7 +20,8 @@ WHERE position(' ' IN name) = 0;
 -- Название треков, которые содержат слово «моя» или «my».
 SELECT name
 FROM tracks
-WHERE name LIKE 'Моя%' or name LIKE 'My%';
+WHERE name LIKE '%моя%'
+OR name LIKE '%my%';
 
 -- Количество исполнителей в каждом жанре.
 SELECT genre.title, COUNT(artist_genre.genre_id) as Количество_исполнителей
@@ -44,17 +45,29 @@ ON album.id = tracks.album_id
 GROUP BY album.title;
 
 -- Все исполнители, которые не выпустили альбомы в 2017 году.
-SELECT artist.name as "Все_исполнители"
-FROM artist_album
-JOIN artist
-ON artist.id = artist_album.artist_id
-JOIN album
-ON album.id = artist_album.album_id
-WHERE album.year != 2017
-GROUP BY artist.name;
+SELECT artist.name
+FROM artist
+WHERE artist.id NOT IN (
+    SELECT album.id
+    FROM album
+    JOIN artist_album ON artist_album.artist_id = album.id
+    WHERE album.year = 2017
+);
 
--- Названия сборников, в которых присутствует конкретный исполнитель (выберите его сами).
+-- SELECT artist.name as "Все_исполнители"
+-- FROM artist_album
+-- JOIN artist
+-- ON artist.id = artist_album.artist_id
+-- JOIN album
+-- ON album.id = artist_album.album_id
+-- WHERE album.year != 2017
+-- GROUP BY artist.name;
 
+-- Названия сборников, в которых присутствует конкретный исполнитель (выберите его сами).SELECT DISTINCT album.title
+FROM album
+JOIN tracks ON tracks.id = album_id
+JOIN artist ON artist.id = album.id
+WHERE artist.name = 'Zivert';
 
 -- Названия альбомов, в которых присутствуют исполнители более чем одного жанра.
 -- Наименования треков, которые не входят в сборники.
