@@ -1,14 +1,5 @@
-class Summa:
-    a: int
-    b: int
-
-    def __init__(self, a: int, b: int) -> None:
-        self.a = a
-        self.b = b
-
-    def __str__(self) -> str:
-        return f"{self.a} + {self.b} = {self.a + self.b}"
+def compare_lists(list_1, list_2, ignore_case=False):
+    return [item for item in list_1 if item not in list_2]
 
 
-summa = Summa(1, 2)
-print(summa)
+print(compare_lists(["apple", "banana", "cherry"], ["Banana", "cherry", "date"]))
