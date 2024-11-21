@@ -20,8 +20,10 @@ WHERE position(' ' IN name) = 0;
 -- Название треков, которые содержат слово «моя» или «my».
 SELECT name
 FROM tracks
-WHERE name = 'моя'
-OR name = 'my';
+WHERE name ILIKE 'my'
+OR name ILIKE 'my'
+OR name ILIKE 'my'
+OR name ILIKE 'my';
 
 -- Количество исполнителей в каждом жанре.
 SELECT genre.title, COUNT(artist_genre.genre_id) as Количество_исполнителей
