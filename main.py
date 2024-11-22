@@ -1,5 +1,9 @@
-def compare_lists(list_1, list_2, ignore_case=False):
-    return [item for item in list_1 if item not in list_2]
+def sort_users_by_activity(dicty):
+    return sorted(
+        user_activity.keys(), key=lambda user: user_activity[user], reverse=True
+    )
 
 
-print(compare_lists(["apple", "banana", "cherry"], ["Banana", "cherry", "date"]))
+user_activity = {"user1": 10, "user2": 5, "user3": 20, "user4": 15, "user5": 10}
+print(sort_users_by_activity(user_activity))
+# ['user3', 'user4', 'user1', 'user5', 'user2']
