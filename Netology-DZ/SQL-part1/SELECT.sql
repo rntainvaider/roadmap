@@ -20,9 +20,13 @@ WHERE position(' ' IN name) = 0;
 -- Название треков, которые содержат слово «моя» или «my».
 SELECT name
 FROM tracks
-WHERE name ILIKE 'my'
-OR name ILIKE 'my'
-OR name ILIKE 'my'
+WHERE name ILIKE 'моя %'
+OR name ILIKE '% моя'
+OR name ILIKE '% моя %'
+OR name ILIKE 'моя'
+OR name ILIKE 'my %'
+OR name ILIKE '% my'
+OR name ILIKE '% my %'
 OR name ILIKE 'my';
 
 -- Количество исполнителей в каждом жанре.
