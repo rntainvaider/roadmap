@@ -3,8 +3,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
-login = "alucard1381111998"
-password = "WoqV9Xof1998QWeR#"
+login = "*****"
+password = "****#"
 
 
 def auto_log_in() -> None:

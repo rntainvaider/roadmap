@@ -1,7 +1,7 @@
 import requests
 
 URL = "https://cloud-api.yandex.net/v1/disk/resources"
-TOKEN = "y0_AgAAAAAsCrTZAAzZwQAAAAEaHCJKAACWjRFOg6BGu65Hq4hMUy1astWjqw"
+TOKEN = "*****"
 HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json",
