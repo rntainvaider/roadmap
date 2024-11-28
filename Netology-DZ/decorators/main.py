@@ -1,13 +1,36 @@
 import os
+import datetime
 
 
 def logger(old_function):
-    def new_function(*args, **kwargs): ...
+    def new_function(*args, **kwargs):
+        call_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        # Имя функции
+        func_name = old_function.__name__
+
+        # Аргументы функции
+        arguments = f"args: {args}, kwargs: {kwargs}"
+
+        # Вызов оригинальной функции и получение результата
+        result = old_function(*args, **kwargs)
+
+        # Формируем строку для записи в лог
+        log_message = (
+            f"[{call_time}] Function '{func_name}' called with {arguments}\n"
+            f"Returned: {result}\n"
+        )
+
+        # Запись в файл
+        with open("main.log", "a", encoding="utf-8") as log_file:
+            log_file.write(log_message)
+
+        return result
 
     return new_function
 
 
-def test_1():
+def test_1() -> None:
 
     path = "main.log"
     if os.path.exists(path):

@@ -5,21 +5,27 @@ import datetime
 def logger(path):
     def __logger(old_function):
         def new_function(*args, **kwargs):
+            # Получаем текущие дату и время
+            call_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            # Имя функции
+            func_name = old_function.__name__
+
+            # Аргументы функции
+            arguments = f"args: {args}, kwargs: {kwargs}"
+
+            # Вызов оригинальной функции и получение результата
             result = old_function(*args, **kwargs)
 
-            # Формируем строку для логирования
-            log_entry = (
-                f"{datetime.datetime.now()} - "
-                f"Function: {old_function.__name__} - "
-                f"Args: {args}, Kwargs: {kwargs} - "
+            # Формируем строку для записи в лог
+            log_message = (
+                f"[{call_time}] Function '{func_name}' called with {arguments}\n"
                 f"Returned: {result}\n"
             )
 
-            # Записываем лог в файл
-            count = 1
-            with open(f"log_{count}.log", "a") as log_file:
-                log_file.write(log_entry)
-                count += 1
+            # Запись в файл
+            with open(path, "a", encoding="utf-8") as log_file:
+                log_file.write(log_message)
 
             return result
 
@@ -28,7 +34,7 @@ def logger(path):
     return __logger
 
 
-def test_2() -> None:
+def test_2():
     paths = ("log_1.log", "log_2.log", "log_3.log")
 
     for path in paths:

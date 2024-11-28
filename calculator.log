@@ -1,0 +1,8 @@
+[2024-11-28 13:46:31] Function 'add' called with args: (<__main__.Calculator object at 0x00000270F5DA0B10>, 10, 5), kwargs: {}
+Returned: 15
+[2024-11-28 13:46:31] Function 'subtract' called with args: (<__main__.Calculator object at 0x00000270F5DA0B10>, 10, 5), kwargs: {}
+Returned: 5
+[2024-11-28 13:46:31] Function 'multiply' called with args: (<__main__.Calculator object at 0x00000270F5DA0B10>, 10, 5), kwargs: {}
+Returned: 50
+[2024-11-28 13:46:31] Function 'divide' called with args: (<__main__.Calculator object at 0x00000270F5DA0B10>, 10, 5), kwargs: {}
+Returned: 2.0
