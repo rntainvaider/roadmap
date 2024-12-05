@@ -1,14 +1,12 @@
-weekdays = [
-    "Saturday",
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-]
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        print("Отработал декоратор")
+        res = func(*args, **kwargs)
+        return res
 
-days = ((day, weekdays[(day - 1) % 7]) for day in range(1, 366))
+    return wrapper
 
-for day in list(days)[:77]:
-    print(day)
+
+@decorator
+def demo_func():
+    print("Отработала оригинальная функция")
