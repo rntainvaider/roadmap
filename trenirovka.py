@@ -1,3 +1,2 @@
-a = ["это", "маленький", "текст", "обидно"]
+n = int(input())
 
-print(list(map(lambda x: x.upper(), a)))
